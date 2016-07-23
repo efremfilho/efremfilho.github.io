@@ -29,23 +29,23 @@ highlighter: rouge
 disqus: mydisqus
 
 # if you don't have any of social below, comment the line
-facebook: myfacebook
-twitter: mytwitter
+facebook: efremfilho
+twitter: efremfilho
 # google: mygoogle
 # instagram: myinstagram
 # pinterest: mypinterest
 # linkedin: mylinkedin
-youtube: myyoutube
-spotify: myspotify
-github: mygithub
-medium: medium
-vimeo: myvimeo
-email: myemail@gmail.com
+#youtube: efremfilho
+#spotify: myspotify
+github: efremfilho
+medium: efremfilho
+#vimeo: myvimeo
+email: efremfilho@ceuma.br
 
 authors:
     efremfilho:
-        name: John Doe
-        bio: A Man who travels the world eating noodles
+        name: Éfrem Maranhão Filho
+        bio: Coordinator at @nite-ceuma | Co-founder at @labtransp | Advisor at @wecarecorp.
         external-image: false
         picture: assets/images/profile.jpg
         twitter: efremfilho
