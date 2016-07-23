@@ -1,16 +1,16 @@
 # main text of home
-name: John Doe
-bio: A Man who travels the world eating noodles
+name: Éfrem Maranhão Filho
+bio: Head of NITE-CEUMA, building products together with Ceuma's community
 
 # twitter summary info
-description: A blog about technology and stuff related
+description: Coordinator at @nite-ceuma | Co-founder at @labtransp | Advisor at @wecarecorp.
 
 # if it's an external image, update below for true
 # better with square images
 external-image: false
 picture: assets/images/profile.jpg
 
-url: http://koppl.in/indigo
+url: http://efremfilho.github.io
 # your url: http://USERNAME.github.io
 
 permalink: /:title/
@@ -43,18 +43,12 @@ vimeo: myvimeo
 email: myemail@gmail.com
 
 authors:
-    johndoe:
+    efremfilho:
         name: John Doe
         bio: A Man who travels the world eating noodles
         external-image: false
         picture: assets/images/profile.jpg
-        twitter: johndoe
-    jamesfoster:
-        name: James Foster
-        bio: A Man who develops software with coffee
-        external-image: false
-        picture: assets/images/james.jpg
-        twitter: jamesfoster
+        twitter: efremfilho
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
@@ -66,11 +60,11 @@ width: normal
 # paginate_path: "blog/:num/"
 
 # if you don't need projects, comment the *projects* configs below
-projects: true
+#projects: true
 
 # if you don't need "about" or "blog", comment them out below
-about: false
-blog: true
+#about: false
+#blog: true
 
 # do you want to show the "read time" of the posts?
 read-time: true
