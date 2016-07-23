@@ -29,12 +29,10 @@ highlighter: rouge
 #disqus: mydisqus
 
 # if you don't have any of social below, comment the line
-facebook: efremfilho
 twitter: efremfilho
 # google: mygoogle
 # instagram: myinstagram
 # pinterest: mypinterest
-# linkedin: mylinkedin
 #youtube: efremfilho
 #spotify: myspotify
 linkedin: efremmaranhaofilho
@@ -42,6 +40,7 @@ github: efremfilho
 medium: efremfilho
 #vimeo: myvimeo
 email: efremfilho@ceuma.br
+facebook: efremfilho
 
 authors:
     efremfilho:
