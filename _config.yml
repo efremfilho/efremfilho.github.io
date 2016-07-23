@@ -26,7 +26,7 @@ highlighter: rouge
 # analytics-piwik-id: 1
 
 # if you don't want comments in your posts, set to false
-disqus: mydisqus
+#disqus: mydisqus
 
 # if you don't have any of social below, comment the line
 facebook: efremfilho
@@ -37,6 +37,7 @@ twitter: efremfilho
 # linkedin: mylinkedin
 #youtube: efremfilho
 #spotify: myspotify
+linkedin: efremmaranhaofilho
 github: efremfilho
 medium: efremfilho
 #vimeo: myvimeo
