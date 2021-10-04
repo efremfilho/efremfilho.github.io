@@ -1,0 +1,98 @@
+<!DOCTYPE html><html><head><meta name="google" content="notranslate"><meta name="viewport" content="target-densitydpi=device-dpi,user-scalable=1,minimum-scale=1,maximum-scale=2.5,initial-scale=1,width=device-width"><meta http-equiv="X-UA-Compatible" content="IE=edge;"><meta name="referrer" content="strict-origin-when-cross-origin"><title>exemplo - farina - Google Drive</title><link rel="shortcut icon" href="//ssl.gstatic.com/docs/spreadsheets/favicon3.ico"><link href='/static/spreadsheets2/client/css/1911645623-waffle_k_ltr.css' type='text/css' rel='stylesheet' nonce="BLrJp22zv43h2vF8TSTLJQ"><style type="text/css" nonce="BLrJp22zv43h2vF8TSTLJQ">
+        html { overflow: visible; }
+        #sheets-viewport { overflow: auto; }
+        #sheets-viewport.widget-viewport { overflow: hidden; }
+        .grid-container { overflow: visible; background: white;}
+        .grid-table-container { overflow: visible; }
+        #top-bar {
+          margin: 0;
+          overflow: hidden;
+        }
+        #top-bar {
+          border-bottom: 1px solid #ccc;
+          padding: 6px 6px 0;
+        }
+        #doc-title { padding-bottom: 5px; }
+        #doc-title .name { font-size: 15px; }
+        #sheet-menu {
+          font-size: 13px;
+          margin: 6px 0 0;
+          padding: 0 0 5px;
+        }
+        #sheet-menu li {
+          display: inline;
+          list-style-type: none;
+          margin: 0;
+          padding: 5px 8px;
+        }
+        #sheet-menu li.active {
+          background-color: #fff;
+          font-weight: bold;
+          border: 1px solid #999;
+        }
+        #top-bar #sheet-menu li.active {
+          border-bottom: 0;
+        }
+        #sheet-menu a, #sheet-menu a:visited { color: #07c; }
+        #footer {
+          background: #f0f0f0;
+          border-top: 1px #ccc solid;
+          border-bottom: 1px #ccc solid;
+          font-size: 13;
+          padding: 10px 10px;
+        }
+        .dash {
+          padding: 0 6px;
+        }
+        .ritz .waffle a { color: inherit; }.ritz .waffle .s0{background-color:#000000;text-align:left;color:#ffffff;font-family:'Arial';font-size:10pt;vertical-align:bottom;white-space:nowrap;direction:ltr;padding:2px 3px 2px 3px;}.ritz .waffle .s1{background-color:#ffffff;text-align:left;color:#000000;font-family:'Arial';font-size:10pt;vertical-align:bottom;white-space:nowrap;direction:ltr;padding:2px 3px 2px 3px;}</style><script type="text/javascript" nonce="FG+SDV9Q6DBZnNbr56mvGA">
+        var activeSheetId;
+
+        function switchToSheet(id) {
+          if (document.getElementById('sheet-menu')) {
+            document.getElementById('sheet-button-' + activeSheetId)
+                .className = '';
+            document.getElementById('sheet-button-' + id).className = 'active';
+          }
+
+          document.getElementById(activeSheetId).style.display = 'none';
+          document.getElementById(id).style.display = '';
+          activeSheetId = id;
+
+          // posObjs() is defined in embeddedObjectJs (see EmbeddedObjectHtmlBuilder.java)
+          posObjs();
+          return false;
+        }
+        
+        function init() {
+        var optPageSwitcher;
+        
+        function resize() {
+          var optMobileWebHeader = document.getElementById('docs-ml-header-id');
+          var optTopBar = document.getElementById('top-bar');
+          var optFooter = document.getElementById('footer');
+          var sheetsViewport = document.getElementById('sheets-viewport');
+
+          if (optMobileWebHeader) {
+            sheetsViewport.style.marginTop = optMobileWebHeader.offsetHeight +
+                (optTopBar ? optTopBar.offsetHeight : 0) + 'px';
+          }
+          var adjustedHeight = window.innerHeight -
+              (optTopBar ? optTopBar.offsetHeight : 0) -
+              (optFooter ? optFooter.offsetHeight : 0);
+          var adjustedWidth = window.innerWidth;
+          sheetsViewport.style.width = (adjustedWidth + 'px');
+          sheetsViewport.style.height = (adjustedHeight + 'px');
+          if (optPageSwitcher) {
+            optPageSwitcher.resize(adjustedWidth, adjustedHeight);
+          }
+        }
+        resize();
+        window.onresize = resize;
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace('?sle=true&', '?');
+        newUrl = newUrl.replace('?sle=true', '');
+        newUrl = newUrl.replace('&sle=true&', '&');
+        newUrl = newUrl.replace('&sle=true', '');
+        window.history.replaceState(null, '', newUrl);
+        }
+        </script><script nonce="FG+SDV9Q6DBZnNbr56mvGA">_docs_flag_initialData={"docs-mwid":true,"docs-smheo":true,"info_params":{"token":"AC4w5VjLaQ_gUs2ZklSQvwbOsif5nNlTJA:1633373524917","includes_info_params":true},"ilcm":{"eui":"ADFN-cu2KPipI-L3qkktM5EFEgrxkLhVedpNAs7bLaJhk82Hc3EDM6B0-DzPb-h7d51A8vQDr-iH","je":1,"sstu":1633373524919000,"si":"CNqH9MW2sfMCFY7ISgAdrKYFbA","gsc":4,"ei":[5712525,5704569,5710692,5714839,5720483,5724435,5702135,5706523,5747256,5727042,5733730,5715515,5713211,5701903,5719482,5701034,5711826,5725052,5717157,5736243,5712635,5705581,5704351,5712146,5725338,5707711,5710938,5712477,5715824,13702623,5703022,5713554,5745003,5739897,5709476,5746864,5711012,5707445,5720516,5714843,5715637,5707204,5741775,5734352,5742522,5708566,5702936,5746603,5720925,5712469,5721360,5739778,5720568,5725300,5724085,5710645,5713657,5708860,5711155,5730290,5711889,5711471,5732962,5708974,5708886,5714628,5743058,5727901,5729206,5714802,5710637,5735281,5713223,5714796,5710893,5721814,5733203,5737897,5723987,5726438,5703259,5712298,5739152,5700057,5709357,5706169,5706933,5709745,5703913,5707047,5707137,5719527,5743452,5700559,5708870,5734571,5743550,5728475,5727063,5747881,5746563,5705777,5711099,5738649,5717118,5737254,5713597,5709381,5738413,5714322,5713542,5731174,5719651,5705223,5737421,5738894,5707819,5720060,5719170,5735509,5707939,5746502,5747046,5723365,5735630,5713152,5705041,5716416,5700893,5746724,5717070,5731783,5703815,5710745,5725240,5707609,5733710,5750314,5720487,5707385,5700333,5732342,5709673,5734632,5714674,5714550,5723679,5715364,5702445,5706786,5710933,5739837,5711850,5716149,5728807,5727853,5711957,5742401,5738081,5703762,5719418,5706133,5728567,5725742,5709709,5736531,5713049,5735806,5745438,5729092,5704641,5705493,5704144,5724896,5711808,5722346,5700579,5724916,5700884,5713333,5741522,5739308,5730225,5720714,5721344,5734994,5710542,5741994,5713207,5714326,5713605,5732449,5702785,5700019,5713195,5716457,5749388,5710678,5709085,5740186,5745622,5741734,5714465,5706007,5703839,5712473,5712352,5711769,5704063,5704621,5720479,5734392,5706069,5701650,5720788,5721307,5735134,5740814,5712905,5740048,5709661,5711230,5744793,5719535,5706270,5708479,5747196,5704581,5728515,5714967,5712929,5747355,5702912,5720595,5732541,5704883,5705649,5705891,5700422,5730285,5727257,5707986,5711522,5724533,5714310,5711765,5740731,5711685,5703591,5728945,5735670,5703028,5723284,5745752,5730867,5717949,5715246,5717161,5719531,5719462,5712033,5703837,5706661,5712913,5714330,5700103,5749140,5736924,5737153,5705299,5725511,5712909,5711550,5743144,5709332,5716028,5738509,5703182,5711708,5716145,5723871,5727624,5722567,5736431,5722189,5721764,5701927],"crc":0,"cvi":[]},"drive_url":"//drive.google.com/u/0?usp\u003dsheets_web","docs-ehr":true,"docs-sup":"/spreadsheets/u/0"}; _docs_flag_cek='_3TrW_1S1dNqv2BHEcblLA\x3d\x3d'; if (window['DOCS_timing']) {DOCS_timing['ifdld']=new Date().getTime();}</script></head><script nonce="FG+SDV9Q6DBZnNbr56mvGA">document.addEventListener('DOMContentLoaded', init);</script><body class="docs-gm"><div id="top-bar"><div id="doc-title"><span class="name">exemplo - farina : result</span></div></div><div id="sheets-viewport"><div id="0" style="display:none;position:relative;" dir="ltr"><div class="ritz grid-container" dir="ltr"><table class="waffle" cellspacing="0" cellpadding="0"><thead><tr><th class="row-header freezebar-origin-ltr header-shim row-header-shim"></th><th id="0C0" style="width:122px;" class="header-shim"></th><th id="0C1" style="width:392px;" class="header-shim"></th></tr></thead><tbody><tr style="height: 20px"><th id="0R0" style="height: 20px;" class="row-headers-background row-header-shim"><div class="row-header-wrapper" style="line-height: 20px">1</div></th><td class="s0" dir="ltr">Valor</td><td class="s0" dir="ltr">Descrição</td></tr><tr style="height: 20px"><th id="0R1" style="height: 20px;" class="row-headers-background row-header-shim"><div class="row-header-wrapper" style="line-height: 20px">2</div></th><td class="s1">exemplo 46</td><td class="s1"></td></tr><tr style="height: 20px"><th id="0R2" style="height: 20px;" class="row-headers-background row-header-shim"><div class="row-header-wrapper" style="line-height: 20px">3</div></th><td class="s1">exemplo 81</td><td class="s1"></td></tr><tr style="height: 20px"><th id="0R3" style="height: 20px;" class="row-headers-background row-header-shim"><div class="row-header-wrapper" style="line-height: 20px">4</div></th><td class="s1">exemplo 134</td><td class="s1"></td></tr><tr style="height: 20px"><th id="0R4" style="height: 20px;" class="row-headers-background row-header-shim"><div class="row-header-wrapper" style="line-height: 20px">5</div></th><td class="s1">exemplo 130</td><td class="s1"></td></tr><tr style="height: 20px"><th id="0R5" style="height: 20px;" class="row-headers-background row-header-shim"><div class="row-header-wrapper" style="line-height: 20px">6</div></th><td class="s1">exemplo 116</td><td class="s1"></td></tr></tbody></table></div></div></div><div id="footer"><span>Published by <a target="_blank" title="Learn more about Google Sheets" href="https://docs.google.com/spreadsheets/u/0/?authuser=0&amp;usp=sheets_web">Google Sheets</a></span><span class="dash">&ndash;</span><a href="https://docs.google.com/u/0/abuse?id=AKkXjoxnn4oSn0Hzu209G7qFt82KewUX5Bz-lB-ahonpXjXZ8CO3dJBCqYNs--yPRq0luSTmwdhzdWp0-p3dwt0:0">Report Abuse</a><span class="dash">&ndash;</span><span>Updated automatically every 5 minutes</span></div><script type="text/javascript" nonce="FG+SDV9Q6DBZnNbr56mvGA">activeSheetId = '0'; switchToSheet('0');</script></body></html>
