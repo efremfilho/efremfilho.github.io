@@ -1,4 +1,5 @@
 > como ensinaria alguém não técnico a programar com google apps script
+<br><br>
 Ensinar alguém não técnico a programar com o Google Apps Script pode ser um processo gradual e prático. Aqui estão algumas etapas que você pode seguir para ajudar a pessoa a começar:
 
 1. Introdução ao Google Apps Script:
@@ -24,7 +25,12 @@ Desafie a pessoa a trabalhar em um projeto prático que combine vários conceito
 
 Lembre-se de que cada pessoa aprende em seu próprio ritmo, então seja paciente e ofereça suporte contínuo. Encoraje a experimentação e a resolução de problemas, pois isso ajudará a pessoa a desenvolver suas habilidades de programação com o Google Apps Script.
 
-> dê exemplos, em google apps script para: variáveis; estruturas de controle (condicionais e loops); funções; consultar uma api
+> dê exemplos, em google apps script para: 
+> variáveis; 
+> estruturas de controle (condicionais e loops); 
+> funções; 
+> consultar uma api
+> <br><br>
 Certamente! Aqui estão alguns exemplos de como usar variáveis, estruturas de controle, funções e consultar uma API usando o Google Apps Script:
 
 1. Exemplo de Variáveis:
@@ -96,8 +102,8 @@ function consultarAPI() {
 Lembre-se de adaptar esses exemplos de acordo com as suas necessidades e a API específica que você deseja consultar.
 o que seria um exercício bom para um iniciante em google apps script?
 
-# Um exercício adequado para um iniciante em Google Apps Script pode ser a criação de um script simples que automatiza uma tarefa comum no Google Sheets. Aqui está um exemplo de exercício:
-
+> Um exercício adequado para um iniciante em Google Apps Script pode ser a criação de um script simples que automatiza uma tarefa comum no Google Sheets. Aqui está um exemplo de exercício:
+<br><br>
 Exercício: Formatação Automática de Planilha
 Descrição: Crie um script que formate automaticamente uma planilha do Google Sheets da seguinte maneira:
 - Defina a primeira linha da planilha como negrito e com fundo cinza claro.
