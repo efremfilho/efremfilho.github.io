@@ -18,6 +18,7 @@ permalink: /:title/
 markdown: kramdown
 kramdown:
   parse_block_html: true
+  toc: true 
 highlighter: rouge
 
 # To enable google analytics, supply your token below
