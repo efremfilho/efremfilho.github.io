@@ -1,8 +1,3 @@
----
-layout: post
-title: Aprenda GAS
----
-
 > # como ensinaria alguém não técnico a programar com google apps script
 
 Ensinar alguém não técnico a programar com o Google Apps Script pode ser um processo gradual e prático. Aqui estão algumas etapas que você pode seguir para ajudar a pessoa a começar:
