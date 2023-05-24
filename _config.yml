@@ -16,6 +16,8 @@ url: http://efrem.io
 permalink: /:title/
 
 markdown: kramdown
+kramdown:
+  parse_block_html: true
 highlighter: rouge
 
 # To enable google analytics, supply your token below
