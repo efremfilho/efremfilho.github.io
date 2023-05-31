@@ -132,3 +132,25 @@ function formataPlanilha() {
 
 Ao realizar esse exercício, o iniciante em Google Apps Script terá a oportunidade de trabalhar com comandos básicos de formatação, entender como interagir com planilhas e ganhar confiança no desenvolvimento de scripts. Além disso, eles também poderão experimentar e adaptar o código para personalizar ainda mais a formatação, se desejado.
 
+> * Como posso usar o Google apps script para criar uma função personalizada no Google Sheets?
+
+Você pode usar o Google Apps Script para criar uma função personalizada no Google Sheets seguindo estas etapas:
+
+1. Acesse o Google Sheets e abra a planilha na qual deseja criar a função personalizada.
+2. No menu superior, clique em "Ferramentas" e selecione "Editor de Scripts". Isso abrirá o editor de script do Google Apps Script em uma nova guia.
+3. No editor de script, você pode escrever sua função personalizada em JavaScript. Aqui está um exemplo simples de uma função personalizada que retorna a soma de dois números:
+
+```javascript
+function somaPersonalizada(a, b) {
+  return a + b;
+}
+```
+
+4. Após escrever sua função personalizada, salve o projeto clicando em "Arquivo" e selecionando "Salvar" (ou use o atalho Ctrl + S).
+5. Retorne para a planilha no Google Sheets. Agora, você pode usar sua função personalizada como qualquer outra função interna do Sheets. Digite `=somaPersonalizada(2, 3)` em uma célula, por exemplo, para obter o resultado da soma personalizada.
+
+Observação: É importante notar que, por padrão, as funções personalizadas criadas com o Google Apps Script não são salvas em um documento específico, mas sim no projeto do script. Portanto, uma vez que você criou a função personalizada, ela estará disponível em qualquer planilha vinculada ao mesmo projeto do script.
+
+Certifique-se de ajustar sua função personalizada de acordo com suas necessidades específicas. As funções personalizadas podem receber argumentos, executar cálculos complexos, interagir com outras funções internas do Google Sheets e até mesmo acessar dados externos por meio de APIs.
+
+Lembre-se de que, após modificar seu código no editor de scripts, você precisará salvar o projeto novamente para que as alterações tenham efeito no Google Sheets.
