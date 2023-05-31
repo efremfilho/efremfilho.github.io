@@ -132,7 +132,7 @@ function formataPlanilha() {
 
 Ao realizar esse exercício, o iniciante em Google Apps Script terá a oportunidade de trabalhar com comandos básicos de formatação, entender como interagir com planilhas e ganhar confiança no desenvolvimento de scripts. Além disso, eles também poderão experimentar e adaptar o código para personalizar ainda mais a formatação, se desejado.
 
-> * Como posso usar o Google apps script para criar uma função personalizada no Google Sheets?
+> # Como posso usar o Google apps script para criar uma função personalizada no Google Sheets?
 
 Você pode usar o Google Apps Script para criar uma função personalizada no Google Sheets seguindo estas etapas:
 
