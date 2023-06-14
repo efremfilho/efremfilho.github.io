@@ -199,3 +199,57 @@ Observação: É importante notar que, por padrão, as funções personalizadas 
 Certifique-se de ajustar sua função personalizada de acordo com suas necessidades específicas. As funções personalizadas podem receber argumentos, executar cálculos complexos, interagir com outras funções internas do Google Sheets e até mesmo acessar dados externos por meio de APIs.
 
 Lembre-se de que, após modificar seu código no editor de scripts, você precisará salvar o projeto novamente para que as alterações tenham efeito no Google Sheets.
+
+> # E como crio um menu customizado no Google Sheets usando Google Apps Scripts que chama um webhook passando todos os valores da linha incluso o número da linha?
+
+Para criar um menu customizado no Google Sheets usando o Google Apps Script que chama um webhook e passa os valores da linha, incluindo o número da linha, você pode seguir estas etapas:
+
+1. Abra o editor de script do Google Apps Script.
+2. No menu superior, clique em "Ferramentas" e selecione "Editor de script".
+3. No editor de script, escreva o código para criar o menu personalizado e chamar o webhook. Aqui está um exemplo básico:
+
+```javascript
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  
+  ui.createMenu('Meu Menu')
+    .addItem('Chamar Webhook', 'chamarWebhook')
+    .addToUi();
+}
+
+function chamarWebhook() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var dataRange = sheet.getDataRange();
+  var values = dataRange.getValues();
+  
+  for (var i = 0; i < values.length; i++) {
+    var rowData = values[i];
+    var rowNumber = i + 1;
+    
+    // Chame o webhook aqui, passando os valores da linha e o número da linha
+    var payload = {
+      values: rowData,
+      rowNumber: rowNumber
+    };
+    
+    // Exemplo de chamada do webhook usando a biblioteca UrlFetchApp
+    var webhookUrl = 'URL_DO_WEBHOOK';
+    var options = {
+      method: 'post',
+      payload: JSON.stringify(payload),
+      contentType: 'application/json'
+    };
+    UrlFetchApp.fetch(webhookUrl, options);
+  }
+}
+```
+
+4. Substitua `'URL_DO_WEBHOOK'` pela URL real do seu webhook para que os dados sejam enviados corretamente.
+5. Salve o projeto clicando em "Arquivo" e selecionando "Salvar" (ou use o atalho Ctrl + S).
+6. Volte para a planilha do Google Sheets e atualize a página.
+7. Você verá um novo menu "Meu Menu" adicionado na barra de navegação do Sheets, com a opção "Chamar Webhook".
+8. Ao selecionar a opção "Chamar Webhook", a função `chamarWebhook()` será executada. Ela obtém os valores de todas as linhas da planilha, itera por elas e chama o webhook, passando os valores da linha e o número da linha para cada linha.
+
+Certifique-se de personalizar o nome do menu e a URL do webhook de acordo com suas necessidades. Além disso, você pode adicionar a lógica adicional necessária dentro da função `chamarWebhook()` para manipular os valores da linha antes de enviá-los para o webhook.
+
+Lembre-se de que as funções devem estar definidas no mesmo projeto do script associado à planilha do Google Sheets em que você deseja adicionar o menu customizado. Certifique-se de que a planilha tenha dados para que a função `chamarWebhook()` possa buscar e enviar.
