@@ -149,6 +149,51 @@ function somaPersonalizada(a, b) {
 4. Após escrever sua função personalizada, salve o projeto clicando em "Arquivo" e selecionando "Salvar" (ou use o atalho Ctrl + S).
 5. Retorne para a planilha no Google Sheets. Agora, você pode usar sua função personalizada como qualquer outra função interna do Sheets. Digite `=somaPersonalizada(2, 3)` em uma célula, por exemplo, para obter o resultado da soma personalizada.
 
+> # Como crio um menu customizado no Google Sheets com Google Apps scripts?
+
+Para criar um menu customizado no Google Sheets usando o Google Apps Script, você pode seguir as seguintes etapas:
+
+1. Abra o editor de script do Google Apps Script.
+2. No menu superior, clique em "Ferramentas" e selecione "Editor de script".
+3. No editor de script, escreva o código para criar o menu personalizado. Aqui está um exemplo básico:
+
+```javascript
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  
+  ui.createMenu('Meu Menu')
+    .addItem('Opção 1', 'opcao1')
+    .addItem('Opção 2', 'opcao2')
+    .addSeparator()
+    .addItem('Opção 3', 'opcao3')
+    .addToUi();
+}
+
+function opcao1() {
+  // Lógica da opção 1
+}
+
+function opcao2() {
+  // Lógica da opção 2
+}
+
+function opcao3() {
+  // Lógica da opção 3
+}
+```
+
+4. Salve o projeto clicando em "Arquivo" e selecionando "Salvar" (ou use o atalho Ctrl + S).
+5. Volte para a planilha do Google Sheets e atualize a página.
+6. Você verá um novo menu "Meu Menu" adicionado na barra de navegação do Sheets, com as opções "Opção 1", "Opção 2" e "Opção 3".
+
+Ao selecionar uma opção do menu, a função correspondente (por exemplo, `opcao1()`, `opcao2()`, etc.) será executada. Você pode adicionar a lógica desejada dentro dessas funções para realizar as operações desejadas na planilha.
+
+Certifique-se de personalizar o nome do menu e as opções de acordo com suas necessidades. Além disso, você pode adicionar quantas opções desejar ao seu menu customizado.
+
+A função `onOpen()` é um acionador especial que é executado automaticamente quando a planilha é aberta. Ela é responsável por criar o menu customizado.
+
+Lembre-se de que as funções devem estar definidas no mesmo projeto do script associado à planilha do Google Sheets em que você deseja adicionar o menu customizado.
+
 Observação: É importante notar que, por padrão, as funções personalizadas criadas com o Google Apps Script não são salvas em um documento específico, mas sim no projeto do script. Portanto, uma vez que você criou a função personalizada, ela estará disponível em qualquer planilha vinculada ao mesmo projeto do script.
 
 Certifique-se de ajustar sua função personalizada de acordo com suas necessidades específicas. As funções personalizadas podem receber argumentos, executar cálculos complexos, interagir com outras funções internas do Google Sheets e até mesmo acessar dados externos por meio de APIs.
