@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <!-- Inclua Marked.js para renderizar Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+      /* Seus estilos CSS */
+    </style>
+  </head>
+  <body>
+    <h1>Processar Requisição</h1>
+    <form id="requestForm">
+      <label for="fileInput">Selecione o arquivo:</label><br>
+      <input type="file" id="fileInput" name="fileInput" accept=".pdf,.doc,.docx,.txt"><br><br>
+
+      <label for="messageContent">Conteúdo da Mensagem:</label><br>
+      <textarea id="messageContent" name="messageContent" rows="4" cols="50" placeholder="Insira sua mensagem aqui..."></textarea><br><br>
+
+      <input type="button" value="Enviar" onclick="processRequest()">
+    </form>
+
+    <h2>Resposta Formatada:</h2>
+    <div id="formattedResponse"></div>
+
+    <h2>JSON Completo:</h2>
+    <pre id="response"></pre>
+
+    <script>
+      function processRequest() {
+        const fileInput = document.getElementById('fileInput').files[0];
+        const messageContent = document.getElementById('messageContent').value;
+
+        if (!fileInput) {
+          alert('Por favor, selecione um arquivo para enviar.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const fileContent = e.target.result;
+
+          // Fazer uma requisição HTTP para o Google Apps Script
+          fetch('https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec', {
+            method: 'POST',
+            body: JSON.stringify({
+              fileContent: fileContent,
+              fileName: fileInput.name,
+              messageContent: messageContent
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(response => {
+            if (response.error) {
+              document.getElementById('formattedResponse').innerText = 'Erro: ' + response.error;
+              document.getElementById('response').innerText = JSON.stringify(response, null, 2);
+              return;
+            }
+
+            // Extrair o "value" do primeiro item de "content"
+            const assistantMessage = response.data.find(item => item.role === 'assistant');
+            let formattedText = '';
+            if (assistantMessage && assistantMessage.content.length > 0) {
+              formattedText = assistantMessage.content[0].text.value;
+            }
+
+            // Renderizar o Markdown para HTML
+            const htmlContent = marked.parse(formattedText);
+            document.getElementById('formattedResponse').innerHTML = htmlContent;
+
+            // Exibir o JSON completo
+            document.getElementById('response').innerText = JSON.stringify(response, null, 2);
+          })
+          .catch(error => console.error('Erro:', error));
+        };
+        
+        reader.readAsDataURL(fileInput);
+      }
+    </script>
+  </body>
+</html>
