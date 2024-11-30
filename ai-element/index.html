@@ -11,6 +11,7 @@
     <script>
         // 1. Capturar todos os parâmetros da URL
         const queryParams = new URLSearchParams(window.location.search);
+        queryParams.append('timestamp', Date.now());
 
         // 2. Construir a URL da API com os parâmetros
         const apiUrl = "https://activepieces.pipefy.com/api/v1/webhooks/X1Bw00TP8a4duxHCbXQb9/sync";
