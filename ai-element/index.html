@@ -1,19 +1,38 @@
-<div id="content"></div>
-<script>
- // Endpoint da API
-const apiUrl = "https://api.exemplo.com/endpoint";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render HTML from API</title>
+</head>
+<body>
+    <div id="content">Carregando...</div>
 
-// Adicionar os parâmetros na URL
-const urlWithParams = `${apiUrl}?name=${encodeURIComponent(name)}&org=${encodeURIComponent(org)}&org_id=${encodeURIComponent(org_id)}&date=${encodeURIComponent(date)}`;
+    <script>
+        // 1. Capturar os parâmetros da URL
+        const queryParams = new URLSearchParams(window.location.search);
+        const name = queryParams.get('name');
+        const org = queryParams.get('org');
+        const org_id = queryParams.get('org_id');
+        const date = queryParams.get('date');
 
-// Fazer a requisição
-fetch(urlWithParams)
-  .then(response => response.text())
-  .then(html => {
-    // Renderizar o HTML retornado
-    document.getElementById('content').innerHTML = html;
-  })
-  .catch(error => {
-    console.error('Erro:', error);
-  });
-</script>
+        // 2. Fazer a requisição para a API com os parâmetros
+        const apiUrl = "https://api.exemplo.com/endpoint";
+        const urlWithParams = `${apiUrl}?name=${encodeURIComponent(name)}&org=${encodeURIComponent(org)}&org_id=${encodeURIComponent(org_id)}&date=${encodeURIComponent(date)}`;
+
+        fetch(urlWithParams)
+          .then(response => {
+            if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
+            return response.text(); // A API retorna HTML como texto
+          })
+          .then(html => {
+            // 3. Renderizar o HTML no elemento da página
+            document.getElementById('content').innerHTML = html;
+          })
+          .catch(error => {
+            console.error('Erro:', error);
+            document.getElementById('content').innerHTML = `<p>Erro ao carregar conteúdo: ${error.message}</p>`;
+          });
+    </script>
+</body>
+</html>
