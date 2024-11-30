@@ -1,0 +1,16 @@
+<div id="content"></div>
+<script>
+  // Endpoint da API
+  const url = "https://activepieces.pipefy.com/api/v1/webhooks/X1Bw00TP8a4duxHCbXQb9/sync";
+
+  // Fazer a requisição GET
+  fetch(url)
+    .then(response => response.text())
+    .then(html => {
+      // Inserir o HTML retornado no DOM
+      document.getElementById('content').innerHTML = html;
+    })
+    .catch(error => {
+      console.error('Erro:', error);
+    });
+</script>
