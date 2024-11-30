@@ -1,16 +1,19 @@
 <div id="content"></div>
 <script>
-  // Endpoint da API
-  const url = "https://activepieces.pipefy.com/api/v1/webhooks/X1Bw00TP8a4duxHCbXQb9/sync";
+ // Endpoint da API
+const apiUrl = "https://api.exemplo.com/endpoint";
 
-  // Fazer a requisição GET
-  fetch(url)
-    .then(response => response.text())
-    .then(html => {
-      // Inserir o HTML retornado no DOM
-      document.getElementById('content').innerHTML = html;
-    })
-    .catch(error => {
-      console.error('Erro:', error);
-    });
+// Adicionar os parâmetros na URL
+const urlWithParams = `${apiUrl}?name=${encodeURIComponent(name)}&org=${encodeURIComponent(org)}&org_id=${encodeURIComponent(org_id)}&date=${encodeURIComponent(date)}`;
+
+// Fazer a requisição
+fetch(urlWithParams)
+  .then(response => response.text())
+  .then(html => {
+    // Renderizar o HTML retornado
+    document.getElementById('content').innerHTML = html;
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+  });
 </script>
