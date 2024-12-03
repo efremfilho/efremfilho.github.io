@@ -1,1 +1,39 @@
 
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Element</title>
+</head>
+<body>
+    <div id="content">Loading...</div>
+
+    <script>
+        // 1. Capturar todos os parâmetros da URL
+        const queryParams = new URLSearchParams(window.location.search);
+        const now = new Date();
+        const formattedTimestamp = now.toISOString().replace('T', ' ').split('.')[0]; // Formato: YYYY-MM-DD HH:mm:ss
+        queryParams.append('timestamp', formattedTimestamp);
+
+        // 2. Construir a URL da API com os parâmetros
+        const apiUrl = "https://activepieces.pipefy.com/api/v1/webhooks/tR1IbMxc1zwKI2aSa2Ag5/sync";
+        const urlWithParams = `${apiUrl}?${queryParams.toString()}`;
+
+        // 3. Fazer a requisição à API
+        fetch(urlWithParams)
+          .then(response => {
+            if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
+            return response.text(); // A API retorna HTML como texto
+          })
+          .then(html => {
+            // 4. Renderizar o HTML no elemento da página
+            document.getElementById('content').innerHTML = html;
+          })
+          .catch(error => {
+            console.error('Erro:', error);
+            document.getElementById('content').innerHTML = `<p>Erro ao carregar conteúdo: ${error.message}</p>`;
+          });
+    </script>
+</body>
+</html>
