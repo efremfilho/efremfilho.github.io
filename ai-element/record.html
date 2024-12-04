@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt_br">
 <head>
@@ -10,30 +9,56 @@
     <div id="content">Loading...</div>
 
     <script>
-        // 1. Capturar todos os parâmetros da URL
+        // Função para realizar fetch com timeout
+        function fetchWithTimeout(url, options = {}, timeout = 30000) {
+            return Promise.race([
+                fetch(url, options),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Tempo de resposta excedido. Tente novamente mais tarde.')), timeout)
+                )
+            ]);
+        }
+
+        // Capturar os parâmetros da URL e adicionar timestamp
         const queryParams = new URLSearchParams(window.location.search);
         const now = new Date();
         const formattedTimestamp = now.toISOString().replace('T', ' ').split('.')[0]; // Formato: YYYY-MM-DD HH:mm:ss
         queryParams.append('timestamp', formattedTimestamp);
 
-        // 2. Construir a URL da API com os parâmetros
+        // Construir a URL da API com os parâmetros
         const apiUrl = "https://activepieces.pipefy.com/api/v1/webhooks/tR1IbMxc1zwKI2aSa2Ag5/sync";
         const urlWithParams = `${apiUrl}?${queryParams.toString()}`;
 
-        // 3. Fazer a requisição à API
-        fetch(urlWithParams)
-          .then(response => {
-            if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
-            return response.text(); // A API retorna HTML como texto
-          })
-          .then(html => {
-            // 4. Renderizar o HTML no elemento da página
-            document.getElementById('content').innerHTML = html;
-          })
-          .catch(error => {
-            console.error('Erro:', error);
-            document.getElementById('content').innerHTML = `<p>Erro ao carregar conteúdo: ${error.message}</p>`;
-          });
+        // Elemento de carregamento
+        const loadingIndicator = document.getElementById('content');
+
+        // Mostrar mensagem de demora após 10 segundos
+        let timeoutMessage = setTimeout(() => {
+            loadingIndicator.innerHTML = `<p>Demorando mais do que o esperado para carregar...</p>`;
+        }, 10000);
+
+        // Medir o tempo de resposta
+        const start = performance.now();
+
+        // Chamada para a API
+        fetchWithTimeout(urlWithParams, {}, 60000) // Timeout ajustado para 60 segundos
+            .then(response => {
+                clearTimeout(timeoutMessage); // Cancelar mensagem de demora
+                const end = performance.now();
+                console.log(`Tempo de resposta da API: ${(end - start).toFixed(2)} ms`);
+
+                if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
+                return response.text(); // Retornar HTML como texto
+            })
+            .then(html => {
+                // Renderizar o HTML retornado pela API
+                loadingIndicator.innerHTML = html;
+            })
+            .catch(error => {
+                clearTimeout(timeoutMessage); // Cancelar mensagem de demora
+                console.error('Erro:', error);
+                loadingIndicator.innerHTML = `<p>Erro ao carregar conteúdo: ${error.message}</p>`;
+            });
     </script>
 </body>
 </html>
