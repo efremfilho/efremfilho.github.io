@@ -2,22 +2,15 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Botão 50% Width sem margens/padding/borda</title>
+  <title>Botão Refresh Dinâmico</title>
   <style>
-    /* Remove margens, paddings e barra de rolagem do body */
     html, body {
       margin: 0;
       padding: 0;
-      overflow: hidden; /* Pode remover se não quiser forçar ocultar rolagem */
+      overflow: hidden;
       height: 100%;
-    }
-
-    /* Centraliza o conteúdo no body via text-align (para o botão inline-block) */
-    body {
       text-align: center;
     }
-
-    /* Botão ocupando 50% do espaço, sem margens/padding/borda */
     button {
       display: inline-block;
       width: 50%;
@@ -25,29 +18,35 @@
       background-color: #007BFF;
       color: #fff;
       cursor: pointer;
-      border: none;        /* sem borda */
-      border-radius: 8px;  /* cantos arredondados */
-      padding: 0;          /* sem padding interno */
-      margin: 0;           /* sem margem externa */
+      border: none;
+      border-radius: 8px;
+      padding: 0;
+      margin: 0;
     }
   </style>
 </head>
 <body>
-  <button onclick="refreshPage()">Refresh</button>
+  <button onclick="refreshParent()">Refresh</button>
 
   <script>
-    function refreshPage() {
-      try {
-        // Se houver um document.referrer, redireciona o top para esse link
-        if(document.referrer) {
-          window.top.location.href = document.referrer;
-        } else {
-          // Caso contrário, tenta recarregar o top
-          window.top.location.reload();
-        }
-      } catch(e) {
-        // Se ocorrer erro (por ex., restrição de mesma origem), recarrega apenas o iframe
-        window.location.reload();
+    // Variável para armazenar o URL completo da página pai
+    let parentURL = '';
+
+    // O código abaixo espera que a página pai envie uma mensagem via postMessage com o URL completo.
+    window.addEventListener("message", function(event) {
+      // Opcional: verifique event.origin para maior segurança
+      if (event.data && event.data.parentURL) {
+        parentURL = event.data.parentURL;
+      }
+    }, false);
+
+    function refreshParent() {
+      if (parentURL) {
+        // Redireciona o top para o URL completo recebido
+        window.top.location.href = parentURL;
+      } else {
+        // Se não houver mensagem com o URL completo, usa o document.referrer (que pode ser incompleto)
+        window.top.location.href = document.referrer;
       }
     }
   </script>
