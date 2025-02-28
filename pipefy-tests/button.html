@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Embed com Botão Voltar</title>
+  <style>
+    /* Zera margens e preenche toda a tela */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    /* Container que simula o embed */
+    .embed-container {
+      width: 100%;
+      height: 80vh; /* altura ajustável conforme a necessidade */
+      background-color: #eaeaea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    /* Estilização do conteúdo interno do embed */
+    .embed-content {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    /* Container do botão */
+    .button-container {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+    /* Estilo do botão */
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="embed-container">
+    <div class="embed-content">
+      <h2>Conteúdo do Embed</h2>
+      <p>Aqui você pode inserir seu conteúdo personalizado.</p>
+    </div>
+  </div>
+  <div class="button-container">
+    <button onclick="voltar()">Voltar</button>
+  </div>
+
+  <script>
+    function voltar() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
