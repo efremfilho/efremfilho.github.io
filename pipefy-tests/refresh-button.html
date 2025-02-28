@@ -2,74 +2,51 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Botão Refresh</title>
+  <title>Botão 50% Width sem margens/padding/borda</title>
   <style>
-    .custom-button {
-      align-items: center;
-      appearance: button;
-      background-color: rgb(0, 94, 252);
-      box-sizing: border-box;
-      color: rgb(255, 255, 255);
-      column-gap: 8px;
-      cursor: pointer;
-      display: flex;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-      font-feature-settings: normal;
-      font-kerning: auto;
-      font-optical-sizing: auto;
-      font-size: 16px;
-      font-size-adjust: none;
-      font-stretch: 100%;
-      font-style: normal;
-      font-variant-alternates: normal;
-      font-variant-caps: normal;
-      font-variant-east-asian: normal;
-      font-variant-emoji: normal;
-      font-variant-ligatures: normal;
-      font-variant-numeric: normal;
-      font-variant-position: normal;
-      font-variation-settings: normal;
-      font-weight: 400;
-      height: 39.6111px;
-      justify-content: center;
-      letter-spacing: normal;
-      line-height: normal;
-      max-width: 100%;
-      position: relative;
-      row-gap: 8px;
+    /* Remove margens, paddings e barra de rolagem do body */
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Pode remover se não quiser forçar ocultar rolagem */
+      height: 100%;
+    }
+
+    /* Centraliza o conteúdo no body via text-align (para o botão inline-block) */
+    body {
       text-align: center;
-      text-indent: 0px;
-      text-rendering: auto;
-      text-shadow: none;
-      text-size-adjust: 100%;
-      text-transform: none;
-      transition-behavior: normal;
-      transition-delay: 0s;
-      transition-duration: 0.125s;
-      transition-property: all;
-      transition-timing-function: ease-in-out;
-      user-select: none;
-      width: 358px;
-      word-spacing: 0px;
-      -webkit-box-align: center;
-      -webkit-box-pack: center;
-      -webkit-font-smoothing: antialiased;
-      -webkit-border-image: none;
+    }
+
+    /* Botão ocupando 50% do espaço, sem margens/padding/borda */
+    button {
+      display: inline-block;
+      width: 50%;
+      height: 40px;
+      background-color: #007BFF;
+      color: #fff;
+      cursor: pointer;
+      border: none;        /* sem borda */
+      border-radius: 8px;  /* cantos arredondados */
+      padding: 0;          /* sem padding interno */
+      margin: 0;           /* sem margem externa */
     }
   </style>
 </head>
 <body>
-  <button class="custom-button" onclick="refreshPage()">Refresh</button>
+  <button onclick="refreshPage()">Refresh</button>
+
   <script>
-    function refreshPage(){
+    function refreshPage() {
       try {
-        // Tenta recarregar a página pai se estiver embutido
-        if (window.top && window.top !== window) {
-          window.top.location.reload();
+        // Se houver um document.referrer, redireciona o top para esse link
+        if(document.referrer) {
+          window.top.location.href = document.referrer;
         } else {
-          window.location.reload();
+          // Caso contrário, tenta recarregar o top
+          window.top.location.reload();
         }
-      } catch (e) {
+      } catch(e) {
+        // Se ocorrer erro (por ex., restrição de mesma origem), recarrega apenas o iframe
         window.location.reload();
       }
     }
