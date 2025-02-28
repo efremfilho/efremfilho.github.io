@@ -2,25 +2,37 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Botão Embedado - 50% Width</title>
+  <title>Botão 50% Width</title>
   <style>
+    /* Remove as margens/paddings padrão do navegador */
     html, body {
       margin: 0;
       padding: 0;
+      /* Se quiser forçar sem barra de rolagem, pode usar:
+         overflow: hidden;
+         Mas cuidado, isso pode ocultar outros conteúdos. */
     }
-    /* O botão ocupará 50% da largura do seu contêiner pai e terá bordas arredondadas */
+
+    /* Aplica a box-sizing globalmente para evitar surpresas de tamanho */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    /* Estilos do botão */
     button {
       display: block;
-      width: 50%;
-      height: 50px;
-      font-size: 16px;
+      width: 50%;           /* 50% do espaço disponível */
+      max-width: 300px;     /* Define um limite máximo, se desejar */
+      height: 40px;         /* Ajuste conforme necessário */
+      margin: 20px auto;    /* Centraliza horizontalmente */
+      font-size: 14px;
       background-color: #007BFF;
       color: #fff;
       border: none;
-      border-radius: 8px; /* Bordas arredondadas */
+      border-radius: 8px;   /* Bordas arredondadas */
       cursor: pointer;
-      margin: 20px auto; /* Centraliza horizontalmente */
     }
+
     button:hover {
       background-color: #0056b3;
     }
@@ -28,6 +40,7 @@
 </head>
 <body>
   <button onclick="voltar()">Voltar</button>
+
   <script>
     function voltar() {
       window.history.back();
