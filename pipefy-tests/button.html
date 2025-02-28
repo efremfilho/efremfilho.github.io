@@ -2,49 +2,65 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Botão 50% Width</title>
+  <title>Botão sem Margem, Borda e Padding</title>
   <style>
-    /* Remove as margens/paddings padrão do navegador */
-    html, body {
-      margin: 0;
-      padding: 0;
-      /* Se quiser forçar sem barra de rolagem, pode usar:
-         overflow: hidden;
-         Mas cuidado, isso pode ocultar outros conteúdos. */
-    }
-
-    /* Aplica a box-sizing globalmente para evitar surpresas de tamanho */
-    *, *::before, *::after {
+    /* Removendo completamente margin, border e padding */
+    .custom-button {
+      align-items: center;
+      appearance: button;
+      background-color: rgb(0, 94, 252);
       box-sizing: border-box;
-    }
-
-    /* Estilos do botão */
-    button {
-      display: block;
-      width: 50%;           /* 50% do espaço disponível */
-      max-width: 300px;     /* Define um limite máximo, se desejar */
-      height: 40px;         /* Ajuste conforme necessário */
-      margin: 20px auto;    /* Centraliza horizontalmente */
-      font-size: 14px;
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      border-radius: 8px;   /* Bordas arredondadas */
+      color: rgb(255, 255, 255);
+      column-gap: 8px;
       cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
+      display: flex;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      font-feature-settings: normal;
+      font-kerning: auto;
+      font-optical-sizing: auto;
+      font-size: 16px;
+      font-size-adjust: none;
+      font-stretch: 100%;
+      font-style: normal;
+      font-variant-alternates: normal;
+      font-variant-caps: normal;
+      font-variant-east-asian: normal;
+      font-variant-emoji: normal;
+      font-variant-ligatures: normal;
+      font-variant-numeric: normal;
+      font-variant-position: normal;
+      font-variation-settings: normal;
+      font-weight: 400;
+      height: 39.6111px;     /* Ajuste se desejar um valor inteiro */
+      justify-content: center;
+      letter-spacing: normal;
+      line-height: normal;
+      max-width: 100%;
+      position: relative;
+      row-gap: 8px;
+      text-align: center;
+      text-indent: 0px;
+      text-rendering: auto;
+      text-shadow: none;
+      text-size-adjust: 100%;
+      text-transform: none;
+      transition-behavior: normal;
+      transition-delay: 0s;
+      transition-duration: 0.125s;
+      transition-property: all;
+      transition-timing-function: ease-in-out;
+      user-select: none;
+      width: 358px;
+      word-spacing: 0px;
+      -webkit-box-align: center;
+      -webkit-box-pack: center;
+      -webkit-font-smoothing: antialiased;
+      -webkit-border-image: none;
+      /* Sem margin, border, padding */
     }
   </style>
 </head>
 <body>
-  <button onclick="voltar()">Voltar</button>
-
-  <script>
-    function voltar() {
-      window.history.back();
-    }
-  </script>
+  <button class="custom-button" onclick="window.history.back()">Voltar</button>
 </body>
 </html>
