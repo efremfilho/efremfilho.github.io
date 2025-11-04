@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mental - Dimensão 1</title>
+    <!-- Carrega o Tailwind CSS para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carrega a biblioteca D3.js para o diagrama -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        /* Estilização para os elementos do mapa mental */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* bg-gray-100 */
+        }
+        
+        /* Estilos para a caixa de detalhes */
+        #details-box h2 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #1e3a8a; /* text-blue-900 */
+            margin-bottom: 0.75rem; /* mb-3 */
+            border-bottom: 2px solid #dbeafe; /* border-blue-100 */
+            padding-bottom: 0.5rem; /* pb-2 */
+        }
+        #details-box p {
+            margin-bottom: 1rem; /* mb-4 */
+            line-height: 1.6; /* leading-relaxed */
+            color: #374151; /* text-gray-700 */
+        }
+        #details-box ul {
+            list-style-type: disc;
+            margin-left: 1.25rem; /* ml-5 */
+            margin-bottom: 1rem; /* mb-4 */
+            color: #4b5563; /* text-gray-600 */
+        }
+        #details-box li {
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+
+        /* Estilos do D3.js */
+        #d3-container svg {
+            width: 100%;
+            height: 100%;
+            min-height: 600px;
+            lg:min-height: 600px;
+        }
+
+        .link {
+            fill: none;
+            stroke: #cbd5e1; /* gray-300 */
+            stroke-width: 1.5px;
+        }
+
+        .node circle {
+            stroke: #1e3a8a; /* blue-900 */
+            stroke-width: 1.5px;
+            transition: all 0.2s ease;
+        }
+        
+        .node--leaf circle {
+            fill: #e0f2fe; /* sky-100 */
+        }
+
+        .node--root circle {
+            fill: #1e3a8a; /* blue-900 */
+        }
+        
+        .node--root text {
+            fill: #1e3a8a; /* blue-900 */
+            font-weight: 600;
+        }
+
+        .node text {
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            fill: #1f2937; /* gray-800 */
+        }
+
+        .node {
+            cursor: pointer;
+        }
+
+        .node:hover > circle {
+            fill: #fca5a5; /* red-300 */
+            stroke: #b91c1c; /* red-700 */
+        }
+
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8">
+        <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6">
+            Dimensão 1: Organização Didático-Pedagógica
+        </h1>
+
+        <!-- Container principal (flexível e responsivo) -->
+        <div class="flex flex-col lg:flex-row gap-6">
+
+            <!-- Coluna do Diagrama -->
+            <div class="lg:w-1/2 border rounded-lg p-4 bg-gray-50 overflow-auto">
+                <!-- <p class="text-center text-sm text-gray-600 mb-4">Clique (ou toque) em um objeto para ver os detalhes.</p> -->
+                <!-- Container do D3 -->
+                <div id="d3-container">
+                    <svg id="d3-svg"></svg>
+                </div>
+            </div>
+
+            <!-- Coluna dos Detalhes -->
+            <div id="details-box" class="lg:w-1/2 border rounded-lg p-6 bg-white shadow-inner min-h-[300px]">
+                <!-- O conteúdo será inserido aqui pelo JavaScript -->
+                <h2>Bem-vindo!</h2>
+                <p>Clique em um item do diagrama ao lado para ver sua explicação detalhada.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Objeto com todas as explicações
+        const explanations = {
+            "D1": {
+                title: "Dimensão 1: Organização Didático-Pedagógica",
+                details: `
+                    <h2>Pontos Importantes</h2>
+                    <ul>
+                        <li><strong>Foco Principal:</strong> O objetivo da Dimensão 1 é a análise da organização didático-pedagógica do curso, com foco no Projeto Pedagógico do Curso (PPC) e nas Diretrizes Curriculares Nacionais (DCNs), quando existentes.</li>
+                        <li><strong>Composição:</strong> Esta é a dimensão mais extensa da avaliação, sendo composta por 14 objetos de avaliação.</li>
+                        <li><strong>Relação Fundamental:</strong> A dimensão busca evidenciar a forma como o curso foi construído, levando em consideração a relação entre o perfil do egresso esperado e a estrutura curricular, a metodologia e as políticas que visam o atingimento desse perfil pelo estudante.</li>
+                        <li><strong>Temas Transversais:</strong> Aborda temas transversais importantes, como acessibilidade, interdisciplinaridade, inclusão, sustentabilidade e autoavaliação.</li>
+                    </ul>
+                    <h2>Explicação da Dimensão 1</h2>
+                    <p>A Dimensão 1, intitulada Organização Didático-Pedagógica, tem como principal objetivo analisar a estruturação do curso, com foco essencial no Projeto Pedagógico do Curso (PPC) e nas Diretrizes Curriculares Nacionais (DCNs), quando aplicáveis. Ela busca evidenciar de que maneira o curso foi concebido e implementado, estabelecendo a relação coerente entre o perfil esperado do egresso e a estrutura curricular proposta, a metodologia adotada e as políticas institucionais em vigor, que são elementos cruciais para garantir que o estudante seja conduzido a alcançar o perfil profissional almejado. É a dimensão mais extensa do instrumento de avaliação, sendo composta por 14 objetos de avaliação.</p>
+                `
+            },
+            "O1_1": {
+                title: "1.1 Políticas institucionais no âmbito do curso",
+                details: `
+                    <ul>
+                        <li><strong>Políticas institucionais de ensino:</strong> Devem constar no PPC, ser coerentes com o PDI, estar implantadas no curso e ser de conhecimento do corpo docente.</li>
+                        <li><strong>Políticas de pesquisa/iniciação científica/iniciação à docência (quando houver):</strong> Devem constar no PPC, ser coerentes com o PDI, estar implantadas no curso e ser de conhecimento do corpo docente.</li>
+                        <li><strong>Políticas de extensão:</strong> Devem constar no PPC, ser coerentes com o PDI, ser de conhecimento do corpo docente, ocorrer como programas/projetos/cursos/eventos/serviços documentados e estar implantadas com carga horária consoante às Diretrizes para Extensão na Educação Superior Brasileira.</li>
+                        <li><strong>Conjunto das políticas (ensino, pesquisa, extensão):</strong> Devem estar alinhadas às políticas públicas e às necessidades loco-regionais (incluindo campi, polos e ambientes profissionais) e ter impacto no desenvolvimento social e sustentável das comunidades.</li>
+                        <li><strong>Políticas Institucionais Específicas:</strong> Devem incluir políticas de incentivo à inovação, ao empreendedorismo, à economia criativa circular ou à economia solidária (conforme o caso) e políticas de apoio a docentes iniciantes.</li>
+                        <li><strong>Disponibilidade Docente e Políticas:</strong> Devem propiciar participação em colegiados/NDE/grupos de trabalho, supervisão de estágio e outras atividades em campos profissionais (quando houver), e orientação de trabalhos de conclusão de curso (quando houver).</li>
+                        <li><strong>Experiência do Corpo Docente:</strong> Deve resultar na participação dos estudantes em trabalhos de iniciação científico-tecnológica ou à docência, publicação de trabalhos científicos/culturais/artísticos, atividades de extensão, trabalhos de conclusão de curso, estágios e projetos de extensão.</li>
+                    </ul>
+                `
+            },
+            "O1_2": {
+                title: "1.2 Estrutura curricular e seus componentes",
+                details: `
+                    <ul>
+                        <li><strong>Estrutura Curricular:</strong> Deve estar discriminada no PPC, implementada e articulada entre si, e de acordo com as DCNs/CNCST e normativas, relacionando a carga horária presencial e a distância.</li>
+                        <li><strong>Estágio curricular ou supervisionado (se previsto):</strong> Deve ser institucionalizado, possuir convênios com ambientes profissionais, ser desenvolvido com plano de atividades acordado (IES, estudantes, organização/profissional liberal), possuir carga horária determinada, coordenação formalizada, adotar processos de orientação compatíveis com as atividades, estar em consonância com o perfil/competências do egresso, proporcionar vivências reais de atuação, e contar com ferramentas digitais de registro/acompanhamento/interação.</li>
+                        <li><strong>Atividades complementares (se previstas):</strong> Devem ser institucionalizadas, coerentes com as competências esperadas, atender à normativa de carga horária total do curso, e considerar diversidade de atividades que estimulem formação cultural, espírito científico e pensamento reflexivo.</li>
+                        <li><strong>Trabalho de conclusão de curso (TCC ou equivalente, se previsto):</strong> Deve ser institucionalizado, possuir regras específicas para orientador/relação com estudantes, e ter critérios de aprovação, regras de cômputo de carga horária, normas de orientação, formas de apresentação/divulgação e disponibilização como recursos educacionais abertos.</li>
+                        <li><strong>Atividades de extensão na estrutura curricular:</strong> Devem ser institucionalizadas, atender às Diretrizes para Extensão e à DCN da área, articular-se com o perfil do egresso, alinhar-se às necessidades do contexto regional (desenvolvimento social, econômico, cultural e ambiental), dispor de critérios de cômputo de carga horária e avaliação, e contar com formas de registro/acompanhamento/interação.</li>
+                        <li><strong>Concepção da estrutura curricular/conteúdos:</strong> Deve evidenciar o vínculo da teoria com a prática e os mecanismos de familiarização com a modalidade a distância (se for o caso).</li>
+                        <li><strong>Concepção da estrutura curricular/unidades/conteúdos:</strong> Deve propiciar a abordagem de temas como educação ambiental, direitos humanos, pessoa com deficiência, relações étnico-raciais e história/cultura afro-brasileira, africana e indígena.</li>
+                        <li><strong>Estrutura Curricular/unidades/conteúdos:</strong> Devem demonstrar abordagem interdisciplinar, estimular articulação entre componentes de ensino, promover inovação/empreendedorismo e evidenciar a oferta da disciplina de Libras.</li>
+                        <li><strong>Planos de ensino dos componentes curriculares:</strong> Devem explicitar objetivos de aprendizagem, ser apresentados/disponíveis aos estudantes, e explicitar suas contribuições para o desenvolvimento do perfil e das competências.</li>
+                        <li><strong>Aprimoramento da estrutura curricular:</strong> Ocorre por meio da avaliação de sua eficácia no desenvolvimento do perfil e das competências esperadas para os egressos.</li>
+                    </ul>
+                `
+            },
+            "O1_3": {
+                title: "1.3 Metodologia",
+                details: `
+                    <ul>
+                        <li><strong>Concepção metodológica:</strong> Deve estar descrita no PPC, alinhada às DCNs/CNCST, coerente com a política pedagógica institucional (PDI), correlacionada com o perfil/competências do egresso. Deve considerar estratégias de retirada de barreiras para aprendizagem de pessoas com deficiência, orientar as estratégias de ensino-aprendizagem, permitir o desenvolvimento dos objetivos educacionais estipulados por unidade curricular e evidenciar os percursos formativos.</li>
+                        <li><strong>Metodologias:</strong> Devem estar evidenciadas no PPC, descritas nos planos de ensino (vinculação e recomendação de utilização do PPC), desenvolvidas/aprimoradas em ações de formação continuada de docentes (inclusive em tecnologias digitais) e aplicadas pelo corpo docente conforme previstas.</li>
+                        <li><strong>Estratégias de ensino-aprendizagem:</strong> Devem estar descritas/justificadas nos planos de ensino (detalhando formato de oferta), ser coerentes com os objetivos de aprendizagem e proporcionar acessibilidade metodológica e ganho progressivo de autonomia do estudante.</li>
+                        <li><strong>Eficácia das metodologias e estratégias:</strong> Seus resultados devem ser avaliados periodicamente, analisados por instâncias de gestão/CPA e gerar ações de aprimoramento.</li>
+                        <li><strong>Estratégias e recursos didáticos:</strong> Devem incentivar a ação do estudante na articulação entre teoria e prática ou no desenvolvimento de projetos/serviços/produtos aplicados.</li>
+                        <li><strong>Metodologias de ensino-aprendizagem adotadas:</strong> Devem incorporar estratégias de aprendizagem adaptativa, promovendo o ganho progressivo de autonomia, e enfatizar o desenvolvimento da motivação intrínseca do estudante.</li>
+                    </ul>
+                `
+            },
+            "O1_4": {
+                title: "1.4 O Programa de Gestão da Aprendizagem do Curso",
+                details: `
+                    <ul>
+                        <li><strong>Documentação e Implementação:</strong> O programa deve estar documentado e ter cronograma definido e implementado.</li>
+                        <li><strong>Participação e Validação:</strong> Deve incluir ampla e relevante participação do corpo docente e ser supervisionado e validado pelo NDE.</li>
+                        <li><strong>Mecanismos de Avaliação:</strong> Deve incluir mecanismos de avaliação da aprendizagem dos estudantes ao longo do desenvolvimento curricular, mecanismos de avaliação em relação a todas as competências definidas (métodos quantitativos ou qualitativos), e identificação de lacunas de aprendizagem a partir das avaliações.</li>
+                        <li><strong>Concepção e Implementação de Intervenções:</strong> Deve incluir concepção e implementação de intervenções no currículo/PPC visando minimizar lacunas de aprendizagem.</li>
+                        <li><strong>Aferição e Avaliação Contínua:</strong> Deve incluir instrumentos de aferição periódica da aprendizagem prevista e a avaliação continuada das intervenções realizadas a partir dos resultados de aprendizado dos estudantes.</li>
+                    </ul>
+                `
+            },
+            "O1_5": {
+                title: "1.5 Procedimentos de avaliação da aprendizagem",
+                details: `
+                    <ul>
+                        <li><strong>Procedimentos Gerais:</strong> Devem estar descritos no PPC, coerentes com o PDI, orientados para atendimento das DCNs/CNCST/normativas, descritos nos planos de ensino, aplicados pelos docentes e orientar as estratégias de ensino-aprendizagem.</li>
+                        <li><strong>Procedimentos nas unidades curriculares:</strong> Devem ter caráter formativo (permitindo ao estudante compreender dificuldades, com resultados informados) e dispor de ferramentas de identificação do estudante (em oferta a distância).</li>
+                        <li><strong>Características da Avaliação:</strong> Devem variar em formas e métodos, possuir caráter somativo (alinhados aos objetivos de aprendizagem) e ser periodicamente avaliados com base em evidências.</li>
+                        <li><strong>Monitoramento da Progressão:</strong> O NDE, o coordenador do curso e a instância de apoio psicopedagógico devem dispor de ferramentas analíticas que geram informações de progressão do desempenho dos estudantes.</li>
+                        <li><strong>Resultados da Avaliação Periódica:</strong> Devem subsidiar os processos de formação continuada do corpo docente e de mediadores pedagógicos (quando houver) e ser utilizados por estes para o aprimoramento dos seus planos de ensino.</li>
+                    </ul>
+                `
+            },
+            "O1_6": {
+                title: "1.6 O processo de aprendizagem mediado por tecnologias",
+                details: `
+                    <ul>
+                        <li><strong>Processo de Aprendizagem:</strong> Deve atender às demandas didático-pedagógicas da estrutura curricular, incluir docentes/mediadores pedagógicos/profissionais envolvidos (conforme o caso), promover a mediação pedagógica (inclusive em momentos presenciais), incluir ações para engajamento no aprendizado e ser coerente com o perfil esperado do egresso.</li>
+                        <li><strong>Atividades de mediação pedagógica (when previstas):</strong> Devem facilitar a compreensão do conteúdo e formação das competências, permitir o acompanhamento dos estudantes, e apresentar indicadores captados (estudantes/egressos) sobre a qualidade da mediação.</li>
+                        <li><strong>Avaliações do Processo:</strong> Devem considerar as competências dos estudantes e a formação da equipe pedagógica, oportunizar a participação dos estudantes na elaboração de indicadores de avaliação e apresentar indicadores quantitativos (estudantes acompanhados e carga horária atribuída).</li>
+                        <li><strong>Ações de capacitação dos profissionais envolvidos:</strong> Devem ser realizadas, devidamente documentadas, consideradas insumo para a gestão dos mediadores e baseadas nas avaliações periódicas.</li>
+                        <li><strong>Atividades de mediação:</strong> Devem colaborar para a inserção de novas metodologias de ensino (observadas as necessidades dos estudantes), direcionar estudantes para recursos adicionais de aprendizagem, ser explicitadas quanto à carga horária síncrona/frequência, auxiliar no desenvolvimento de competências (pesquisa, escrita acadêmica, resolução de problemas) e facilitar a integração com a equipe multidisciplinar/polos (quando houver).</li>
+                    </ul>
+                `
+            },
+            "O1_7": {
+                title: "1.7 Tecnologias Digitais no âmbito do curso",
+                details: `
+                    <ul>
+                        <li><strong>Tecnologias Digitais (incluindo AVA):</strong> Devem ser implementadas com ações de capacitação focadas no letramento digital de docentes e profissionais, permitir a inclusão digital (estudantes, docentes, profissionais), garantir acessibilidade (tecnologias assistivas) e possibilitar a interatividade.</li>
+                        <li><strong>Tecnologias Digitais no ensino-aprendizagem:</strong> Devem promover acesso/disponibilidade de materiais, promover experiências colaborativas, possuir recursos/sistemas/hardwares/softwares apropriados, possibilitar a cooperação e permitir a realização das atividades didático-pedagógicas previstas no PPC.</li>
+                        <li><strong>Ambiente Virtual de Aprendizagem (AVA):</strong> Deve permitir aos estudantes o acesso aos resultados de avaliações e devolutivas personalizadas e a realização de diferentes formas de atividades (com foco no protagonismo).</li>
+                        <li><strong>Material Didático:</strong> Deve ter propósito, concepção e formatos detalhados no PPC, ser validado por equipe multidisciplinar, contemplar o perfil do egresso e a estrutura curricular, garantir acessibilidade. Deve promover interdisciplinaridade, ensino contextualizado, raciocínio crítico-reflexivo, estimular a diversidade/práticas didáticas inovadoras, indicar período/taxa de atualização e priorizar recursos interativos/diversificados/digitalmente enriquecidos.</li>
+                        <li><strong>Avaliação sobre a efetividade das tecnologias:</strong> Deve ser realizada por estudantes, corpo docente, mediadores pedagógicos (quando for o caso) e comunidade externa ao curso.</li>
+                        <li><strong>Tecnologias Digitais (quando previsto):</strong> Devem apresentar recursos imersivos de realidade virtual ou ampliada e incluir sistemas de inteligência artificial dedicados a promover a aprendizagem, supervisionados por pessoas.</li>
+                    </ul>
+                `
+            },
+            "O1_8": {
+                title: "1.8 Processos de Gestão do Curso",
+                details: `
+                    <ul>
+                        <li><strong>Processo de gestão (em PPC):</strong> Deve incluir estrutura e responsabilidades definidas, fontes de informação dos indicadores (autoavaliação e externas), e análise desses indicadores para identificação de oportunidades de melhorias.</li>
+                        <li><strong>Periodicidade Definida:</strong> Deve haver periodicidade definida para a autoavaliação do curso, análise/implementação de melhorias e avaliação da eficácia das ações.</li>
+                        <li><strong>Resultados das avaliações:</strong> Devem ser conhecidos pela comunidade acadêmica (considerando todos os locais de oferta), disponibilizados por tecnologias digitais e divulgados para o público externo.</li>
+                        <li><strong>Plano de Ação:</strong> Deve haver plano de ação de acompanhamento e monitoramento implementado que inclua múltiplas fontes de informação, permita a identificação de melhoria contínua, defina responsáveis/cronograma de execução e avalie a eficácia.</li>
+                        <li><strong>Processo de Autoavaliação:</strong> Em conjunto com políticas institucionais, deve demonstrar acompanhamento multidimensional do desempenho docente e planejamento/implementação de ações de capacitação/formação continuada para a docência.</li>
+                    </ul>
+                `
+            },
+            "O1_9": {
+                title: "1.9 Sistema de acolhimento e apoio aos estudantes",
+                details: `
+                    <ul>
+                        <li><strong>Sistema Implementado:</strong> Deve ser definido no PPC, ter coerência com o PDI, ser coerente com o perfil dos ingressantes, considerar as diferentes realidades socioeconômicas/culturais.</li>
+                        <li><strong>Avaliação Diagnóstica:</strong> Deve realizar avaliação diagnóstica de ingressantes para identificar necessidades de nivelamento e outras demandas de suporte.</li>
+                        <li><strong>O Sistema Contempla:</strong> Ações de nivelamento, ações de intermediação, acessibilidade metodológica atitudinal e demais formas de inclusão, apoio psicopedagógico, amparo socioemocional e ações para o desenvolvimento do letramento digital.</li>
+                        <li><strong>Promoção da Inclusão:</strong> Deve contemplar a promoção de estratégias de reconhecimento da diferença/diversidade, inclusão de segmentos sociais discriminados e igualdade de oportunidades.</li>
+                        <li><strong>Suporte Específico:</strong> Deve oferecer suporte aos estudantes com deficiência, superdotação, altas habilidades, transtorno do espectro autista e demais neurodivergências.</li>
+                        <li><strong>Desenvolvimento e Avaliação:</strong> O sistema deve ser desenvolvido por equipe de especialistas e avaliado para mensurar a eficácia (em termos de resultados alcançados, permanência e desempenho).</li>
+                    </ul>
+                `
+            },
+            "O1_10": {
+                title: "1.10 Ações de apoio à inserção profissional dos estudantes",
+                details: `
+                    <ul>
+                        <li><strong>Definição e Organização:</strong> As ações devem estar definidas no PPC, de acordo com DCNs/CNCST/normativa vigente, organizar-se com participação do NDE e desenvolver cadastros/bancos de dados/sistemas de monitoramento.</li>
+                        <li><strong>Apoio e Convênios:</strong> Devem subsidiar a formulação de atividades práticas e de extensão, a celebração de convênios de estágio/cooperação acadêmica/mobilidade, incluir divulgação regular de oportunidades e canais ágeis/transparentes para disseminação de informações.</li>
+                        <li><strong>Serviços Ofertados:</strong> Devem incluir prestação de serviços de mentoria/projeto de vida/aconselhamento vocacional e patrocínio a redes de contatos/apoio mútuo/eventos de intercâmbio entre estudantes e egressos.</li>
+                        <li><strong>Mapeamento:</strong> Devem promover o mapeamento de trajetórias ocupacionais típicas, do tempo médio de colocação no mercado de trabalho e das competências/características de perfil associadas à inserção/adaptação/progressão profissional.</li>
+                        <li><strong>Incentivo e Atualização Curricular:</strong> Devem incluir núcleos de incentivo à inovação/empreendedorismo/economia criativa/solidária (conforme o caso) e a atualização na oferta de disciplinas ou atividades complementares em função de demandas de conhecimentos e habilidades identificadas.</li>
+                    </ul>
+                `
+            },
+            "O1_11": {
+                title: "1.11 Perfil do Egresso",
+                details: `
+                    <ul>
+                        <li><strong>Definição do Perfil:</strong> Os perfis geral e específico devem estar definidos no PPC, de acordo com as DCNs/CNCST/normativas e com o ambiente profissional.</li>
+                        <li><strong>Avaliação:</strong> Os perfis são avaliados, considerando sua materialização/reflexo na estrutura/componentes/conteúdos curriculares, incluindo a devolutiva de estudantes e egressos (quando houver).</li>
+                        <li><strong>Revisão Periódica:</strong> São periodicamente revisados e atualizados (além do cumprimento básico das DCNs/CNCST), com apoio de especialistas externos à IES, do ambiente profissional.</li>
+                        <li><strong>Função da Revisão:</strong> A revisão ocorre em função das avaliações internas e externas realizadas, visando atualizações curriculares, aprimoramento do processo formativo e melhorias da organização de espaço pedagógico, para o aperfeiçoamento contínuo.</li>
+                        <li><strong>Uso de Tecnologias:</strong> Os perfis são desenvolvidos utilizando-se da integração de tecnologias educacionais digitais, considerando-se sua materialização/reflexo na estrutura, nos componentes e nos conteúdos curriculares.</li>
+                    </ul>
+                `
+            },
+            "O1_12": {
+                title: "1.12 Competências gerais e específicas desenvolvidas pelos egressos",
+                details: `
+                    <ul>
+                        <li><strong>Definição das Competências:</strong> Devem estar definidas no PPC, de acordo com as DCNs/CNCST/normativas, ser coerentes com o perfil esperado do egresso, e ser compostas pelos conhecimentos, habilidades e atitudes que o egresso deve ter ao concluir o curso.</li>
+                        <li><strong>Revisão Periódica:</strong> São periodicamente revisadas e atualizadas (além do cumprimento básico das DCNs/CNCST), com apoio de representantes externos à IES, do ambiente de atuação profissional.</li>
+                        <li><strong>Uso de Tecnologias:</strong> As competências são desenvolvidas utilizando-se da integração com tecnologias educacionais digitais, considerando-se sua materialização/reflexo na estrutura, nos componentes e nos conteúdos curriculares.</li>
+                        <li><strong>Função da Revisão:</strong> A revisão ocorre em função das avaliações internas e externas, visando atualizações curriculares, aprimoramento do processo formativo e melhorias da organização de espaço pedagógico, para o aperfeiçoamento contínuo.</li>
+                    </ul>
+                `
+            },
+            "O1_13": {
+                title: "1.13 Acompanhamento de egressos",
+                details: `
+                    <ul>
+                        <li><strong>Ações de Acompanhamento:</strong> Devem estar de acordo com as DCNs/CNCST/normativa vigente, incluir coleta regular e sistemática de informações (empregabilidade, remuneração, satisfação profissional), incluir métricas quantitativas e qualitativas e incluir estímulo para o engajamento dos egressos.</li>
+                        <li><strong>Monitoramento do Mercado:</strong> Devem produzir relatório periódico com diagnósticos sobre o desempenho dos egressos junto a empregadores, contemplar a oferta de formação continuada ou de especialização e subsidiar (com base no diagnóstico) a proposição de ações de melhoria.</li>
+                        <li><strong>Mapeamento:</strong> Devem possibilitar o mapeamento de trajetórias ocupacionais típicas, do tempo médio de colocação no mercado de trabalho e das competências/características de perfil associadas à inserção/adaptação/progressão profissional.</li>
+                        <li><strong>Integração de Tecnologias:</strong> Devem incluir o uso de tecnologias de análise de dados e inteligência artificial para obter compreensão do progresso/impacto dos egressos, análise preditiva e modelagem de trajetória de carreira.</li>
+                        <li><strong>Retroalimentação Curricular:</strong> Incluem a integração das devolutivas dos egressos no aprimoramento do curso em todas as suas fases, desde o desenho do currículo.</li>
+                    </ul>
+                `
+            },
+            "O1_14": {
+                title: "1.14 Ações de internacionalização acadêmica no âmbito do curso",
+                details: `
+                    <p>(Obrigatório apenas para cursos que contemplam ações de internacionalização no PPC ou nas DCNs).</p>
+                    <ul>
+                        <li><strong>Previsão e Coordenação:</strong> As ações devem estar previstas no PDI e efetivarem-se no PPC, e possuir coordenação, setor ou responsável designado formalmente.</li>
+                        <li><strong>Incluem:</strong> Atividades de aprendizagem em colaboração com IES estrangeiras, eventos/palestras com atores internacionais, monitoramento e avaliação de resultados, programas de mobilidade (estudantil e/ou pesquisa colaborativa) e estímulo à promoção da interculturalidade e do combate à xenofobia.</li>
+                        <li><strong>Fomento e Acolhimento:</strong> Fomentam a mobilidade docente (para ministrar ou fazer cursos no exterior) e executam programa de acolhimento a estudantes, docentes e pesquisadores internacionais.</li>
+                        <li><strong>Colaboração de Docentes Estrangeiros:</strong> As ações estabelecem-se na implementação de projetos com a colaboração de docentes estrangeiros para o desenvolvimento, disseminação e transferência de inteligência, tecnologia e conhecimento.</li>
+                    </ul>
+                `
+            }
+        };
+
+        /**
+         * Função para exibir os detalhes de um nó do diagrama.
+         * Esta função é anexada ao 'window' para ser acessível pelo Mermaid.
+         * @param {string} id O ID do nó clicado (ex: "O1_1")
+         */
+        window.showDetails = function(id) {
+            const detailsBox = document.getElementById('details-box');
+            const data = explanations[id];
+
+            if (data) {
+                detailsBox.innerHTML = `<h2>${data.title}</h2>${data.details}`;
+            } else {
+                detailsBox.innerHTML = `<h2>Erro</h2><p>Detalhes não encontrados para o item ${id}.</p>`;
+            }
+        };
+
+        /**
+         * Função para renderizar o gráfico D3.js
+         */
+        function renderD3Chart() {
+            // 1. Transformar os dados do 'explanations' para a hierarquia do D3
+            const rootData = {
+                name: "Dimensão 1",
+                id: "D1",
+                children: []
+            };
+
+            for (const key in explanations) {
+                if (key !== "D1") {
+                    rootData.children.push({
+                        name: explanations[key].title,
+                        id: key
+                    });
+                }
+            }
+
+            // 2. Configurações do D3
+            const container = document.getElementById('d3-container');
+            const width = container.clientWidth;
+            const height = 600; // Altura fixa para melhor distribuição vertical
+            const margin = {top: 20, right: 180, bottom: 20, left: 120}; // Margens para o texto
+            
+            const treeWidth = width - margin.left - margin.right;
+            const treeHeight = height - margin.top - margin.bottom;
+
+
+            const svg = d3.select("#d3-svg")
+                .attr("viewBox", [0, 0, width, height])
+                .style("width", "100%")
+                .style("height", "auto");
+            
+            // Limpa o SVG anterior para redesenhar
+            svg.selectAll("*").remove();
+
+            const g = svg.append("g")
+                .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+            // 3. Criar o Layout de Árvore Horizontal
+            const tree = d3.tree()
+                .size([treeHeight, treeWidth]); // [altura, largura]
+
+            const root = tree(d3.hierarchy(rootData));
+
+            // 4. Desenhar os Links (Linhas)
+            const link = g.append("g")
+                .attr("class", "links")
+                .selectAll("path")
+                .data(root.links())
+                .join("path")
+                .attr("class", "link")
+                .attr("d", d3.linkHorizontal()
+                    .x(d => d.y) // Invertido: y é a posição horizontal
+                    .y(d => d.x) // Invertido: x é a posição vertical
+                );
+
+            // 5. Desenhar os Nós (Círculos e Texto)
+            const node = g.append("g")
+                .attr("class", "nodes")
+                .selectAll("g")
+                .data(root.descendants())
+                .join("g")
+                .attr("class", d => d.depth === 0 ? "node node--root" : "node node--leaf")
+                .attr("transform", d => `translate(${d.y}, ${d.x})`) // Invertido (y, x)
+                .on("click", (event, d) => {
+                    window.showDetails(d.data.id);
+                });
+            
+            // Adiciona o tooltip (hint)
+            node.append("title")
+                .text(d => `Clique para ver detalhes: "${d.data.name}"`);
+
+            node.append("circle")
+                .attr("r", d => d.depth === 0 ? 10 : 7);
+
+            node.append("text")
+                .attr("dy", "0.31em")
+                .attr("x", d => d.children ? -14 : 14) // Posição do texto (antes ou depois do círculo)
+                .attr("text-anchor", d => d.children ? "end" : "start") // Alinhamento do texto
+                .text(d => d.data.name)
+                .clone(true).lower()
+                .attr("stroke", "white")
+                .attr("stroke-width", 3);
+            
+            // Não é mais necessário centralizar o texto da raiz
+        }
+
+
+        // Inicializa
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Exibe os detalhes iniciais da Dimensão 1
+            window.showDetails('D1');
+            
+            // Renderiza o gráfico D3
+            renderD3Chart();
+
+            // Recria o gráfico se a janela for redimensionada (para responsividade)
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(renderD3Chart, 250);
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
